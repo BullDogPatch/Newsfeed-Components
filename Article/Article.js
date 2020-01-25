@@ -115,15 +115,47 @@ const articles = document.querySelector('.articles');
 
 function createArticles(title, date, firstParagraph, secondParagraph, thirdParagraph) {
 
+  // create new elements
   const article = document.createElement('div');
   const articleTitle = document.createElement('h2');
   const articleDate = document.createElement('p');
   const paragraph1 = document.createElement('p');
   const paragraph2 = document.createElement('p');
   const paragraph3 = document.createElement('p');
-  const span = document.createElement('span');
+  const expandButton = document.createElement('span');
 
+  // create the structure
+  article.append(articleTitle);
+  article.append(articleDate);
+  article.append(paragraph1);
+  article.append(paragraph2);
+  article.append(paragraph3);
+  article.append(expandButton);
+
+  // create class names
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  // create content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  paragraph1.textContent = firstParagraph;
+  paragraph2.textContent = secondParagraph;
+  paragraph3.textContent = thirdParagraph;
+  expandButton.textContent = 'expand';
+
+  // event
+  expandButton.addEventListener('click', (event) => {
+    article.classList.toggle('article-open');
+  })
+
+  return article;
 }
+
+data.forEach(dataSet => {
+  articles.append(createArticles(dataSet.title, dataSet.date, dataSet.firstParagraph, dataSet.secondParagraph, dataSet.thirdParagraph))
+})
 
 /* <div class="article">
 <h2>{title of the article}</h2>
